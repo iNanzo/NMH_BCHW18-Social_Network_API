@@ -1,20 +1,23 @@
 {
-  "name": "28-Stu_Mini-Project",
-  "version": "1.0.1",
-  "description": "Mongoose back-end project - Develop",
+  "name": "nmh_bchw18",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
-    "seed": "node utils/seed",
-    "heroku-postbuild": "node utils/seed.js"
-  },
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.13"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.9"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iNanzo/NMH_BCHW18.git"
+  },
+  "author": "Newton Hoang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iNanzo/NMH_BCHW18/issues"
+  },
+  "homepage": "https://github.com/iNanzo/NMH_BCHW18#readme"
 }
