@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { User, Thought, } = require('../models');
+const { User, Thought, Reaction } = require('../models');
 const { getRandomName, getRandomThought } = require('./data');
 
 connection.on('error', (err) => err);
@@ -10,6 +10,7 @@ connection.once('open', async () => {
   // Drop existing Users and Thoughts
   await User.deleteMany({});
   await Thought.deleteMany({});
+  // await Reaction.deleteMany({});
 
   // Create empty array to hold the users
   const users = [];
@@ -20,7 +21,7 @@ connection.once('open', async () => {
     let user =
     {
       username: getRandomName(),
-      email: `${user.username}${i}@email.com`
+      email: `username${i}@email.com`
     }
     users.push(user)
   }
@@ -29,18 +30,18 @@ connection.once('open', async () => {
     let thought =
     {
       thoughtText: getRandomThought(),
-      username: getRandomName(),
-      date: Date()
+      username: users[i].username,
+      postDate: Date()
     }
     thoughts.push(thought)
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     let reaction =
     {
       reactionBody: getRandomThought(),
-      username: getRandomName(),
-      date: Date()
+      username: users[i].username,
+      postDate: Date()
     }
     reactions.push(reaction)
   }
@@ -48,6 +49,7 @@ connection.once('open', async () => {
   // Add to the collection and await the results
   await User.collection.insertMany(users);
   await Thought.collection.insertMany(thoughts);
+  // await Reaction.collection.insertMany(reactions);
 
   // // Log out the seed data to indicate what should appear in the database
   // console.table(users);

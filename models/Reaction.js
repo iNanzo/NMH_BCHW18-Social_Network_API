@@ -1,41 +1,37 @@
-const { Schema, Types, model } = require("mongoose");
-const dayjs =  require("../utils/date.js"); 
+const { Schema, Types } = require("mongoose");
+const getDate =  require("../utils/date.js"); 
+
 
 const reactionSchema = new Schema(
   {
     reactionId:
     {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
+        Type: Types.ObjectId,
     },
     reactionBody:
     {
-      type: String,
-      required: true,
-      minlength: 1,
-      maxlength: 280,
+        type: String,
+        required: true,
+        maxlength: 280,
     },
     username:
     {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
     },
-    date:
+    postDate:
     {
-      type: Date,
-      default: Date.now,
-      get: dayjs.dateFormat,
+        type: Date,
+        default: Date.now,
+        get: getDate.formatDate,
     },
   },
   {
-    toJSON: 
-    {
-      getters: true,
-      virtuals: true,
-    },
-    id: false,
-  }
+      toJSON: { getters: true }
+  },
+  {
+      id: false,
+  },
 );
 
-const Reaction = model("reaction", reactionSchema);
-module.exports = Reaction;
+module.exports = reactionSchema;
