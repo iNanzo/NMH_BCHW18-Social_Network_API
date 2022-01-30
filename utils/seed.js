@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { User, Thought } = require('../models');
+const { User, Thought, } = require('../models');
 const { getRandomName, getRandomThought } = require('./data');
 
 connection.on('error', (err) => err);
@@ -13,38 +13,45 @@ connection.once('open', async () => {
 
   // Create empty array to hold the users
   const users = [];
+  const thoughts = [];
+  const reactions = [];
 
-  // Get some random prompt objects using a helper function that we imported from ./data
-  const prompts = getRandomThought(10);
-
-  // Loop 20 times -- add users to the users array
-  for (let i = 0; i < 20; i++) {
-    const fullName = getRandomName();
-    const first = fullName.split(' ')[0];
-    const last = fullName.split(' ')[1];
-    const github = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
-
-    users.push({
-      first,
-      last,
-      github,
-      prompts,
-    });
+  for (let i = 0; i < 5; i++) {
+    let user =
+    {
+      username: getRandomName(),
+      email: `${user.username}${i}@email.com`
+    }
+    users.push(user)
   }
 
-  // Add users to the collection and await the results
-  await Student.collection.insertMany(users);
+  for (let i = 0; i < 5; i++) {
+    let thought =
+    {
+      thoughtText: getRandomThought(),
+      username: getRandomName(),
+      date: Date()
+    }
+    thoughts.push(thought)
+  }
 
-  // Add courses to the collection and await the results
-  await Course.collection.insertOne({
-    courseName: 'UCLA',
-    inPerson: false,
-    users: [...users],
-  });
+  for (let i = 0; i < 10; i++) {
+    let reaction =
+    {
+      reactionBody: getRandomThought(),
+      username: getRandomName(),
+      date: Date()
+    }
+    reactions.push(reaction)
+  }
 
-  // Log out the seed data to indicate what should appear in the database
-  console.table(users);
-  console.table(prompts);
-  console.info('Seeding complete! 🌱');
-  process.exit(0);
+  // Add to the collection and await the results
+  await User.collection.insertMany(users);
+  await Thought.collection.insertMany(thoughts);
+
+  // // Log out the seed data to indicate what should appear in the database
+  // console.table(users);
+  // console.table(prompts);
+  // console.info('Seeding complete! 🌱');
+  // process.exit(0);
 });
