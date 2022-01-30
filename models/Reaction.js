@@ -1,4 +1,5 @@
-const { Schema, Types, model } = require('mongoose');
+const { Schema, Types, model } = require("mongoose");
+const dayjs =  require("../utils/date.js"); 
 
 const reactionSchema = new Schema(
   {
@@ -19,10 +20,11 @@ const reactionSchema = new Schema(
       type: String,
       required: true,
     },
-    createdAt:
+    date:
     {
       type: Date,
       default: Date.now,
+      get: dayjs.dateFormat,
     },
   },
   {
@@ -35,5 +37,5 @@ const reactionSchema = new Schema(
   }
 );
 
-const Reaction = model('reaction', reactionSchema);
+const Reaction = model("reaction", reactionSchema);
 module.exports = Reaction;
