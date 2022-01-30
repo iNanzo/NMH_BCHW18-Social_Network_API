@@ -10,11 +10,11 @@ module.exports = {
     // Get singular Thought
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.id })
-            // .select("-__v")
-            // .populate("friends")
+            // .select('-__v')
+            // .populate('reactions')
             .then((thought) =>
                 !thought
-                    ?res.status(404).json({ message: "User with ID not found" })
+                    ?res.status(404).json({ message: "Thought with ID not found" })
                     :res.json(thought))
             .catch((err) => res.status(500).json(err));
     },
@@ -27,9 +27,9 @@ module.exports = {
                     { $push: { thoughts: thought._id } },
                     { new: true });
             })
-            .then((thought) =>
-                !thought
-                    ?res.status(404).json({ message: "No user with that ID" })
+            .then((user) =>
+                !user
+                    ?res.status(404).json({ message: "User with ID not found" })
                     :res.json(user))
             .catch((err) => res.status(500).json(err));
     },

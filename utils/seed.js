@@ -36,22 +36,22 @@ connection.once('open', async () => {
     thoughts.push(thought)
   }
 
-  for (let i = 0; i < 5; i++) {
-    let reaction =
-    {
-      reactionBody: getRandomThought(),
-      username: users[i].username,
-      postDate: Date()
-    }
-    reactions.push(reaction)
-  }
+  // for (let i = 0; i < 5; i++) {
+  //   let reaction =
+  //   {
+  //     reactionBody: getRandomThought(),
+  //     username: users[i].username,
+  //     postDate: Date()
+  //   }
+  //   reactions.push(reaction)
+  // }
 
   // Add to the collection and await the results
   await User.collection.insertMany(users);
   await Thought.collection.insertMany(thoughts);
   // await Reaction.collection.insertMany(reactions);
 
-  // // Log out the seed data to indicate what should appear in the database
+  // // Log out the seed data to indicate whant should appear in the database
   // console.table(users);
   // console.table(prompts);
   // console.info('Seeding complete! 🌱');
