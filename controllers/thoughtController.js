@@ -54,6 +54,7 @@ module.exports = {
             .then(() => res.json({ message: "Thought and connected users have been deleted" }))
             .catch((err) => res.status(500).json(err));
     },
+    // Create new Reaction
     createReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
@@ -62,6 +63,7 @@ module.exports = {
         .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
+    // Delete existing Reaction
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
